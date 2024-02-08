@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+/* bg-[#11111b] */
+
+.siginInput {
+	@apply w-full p-2 text-white rounded-lg from-[#11111b] to-[#181825] bg-gradient-to-r;
+}
+
+.siginLabel {
+	@apply text-white text-sm font-bold;
+}
+
+.error {
+	@apply outline outline-red-500;
+}
