@@ -55,8 +55,7 @@ const Message = ({ message, onDelete, deleted = false }: MessageProps) => {
 				<div className={`text-[#cdd6f4] p-4 rounded-xl max-w-[80%] flex items-end gap-3 justify-between ${isMessageYours ? "bg-[#313244]" : "bg-[#11111b]"} shadow-xl`}>
 					<div className={`${deleted && "text-xs text-[#f38ba8]"}`}>{message.body}</div>
 					<div className="text-xs align-text-bottom text-[#74c7ec]">{formatTime(message.$createdAt)}</div>
-				</div>
-
+				</div>				
 			</div>
 		</div>
 	)
