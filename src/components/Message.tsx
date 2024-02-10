@@ -11,6 +11,7 @@ interface MessageProps {
 
 const Message = ({ message, onDelete, deleted = false }: MessageProps) => {
 	const user = useContext(UserContext)
+	const [fodao, setFodao] = useState(false);
 
 	function formatTime(dateString: string): string { // Ai generated xd
 		// Convert the string to a Date object
@@ -34,6 +35,9 @@ const Message = ({ message, onDelete, deleted = false }: MessageProps) => {
 			if (user.user?.$id === "65c39a36aacf378c898a") {
 				setIsMessageYours(true);
 			}
+			if (message.user_id === "65c5124c177b99c026e7") {
+				setFodao(true);
+			}
 		}
 
 		init();
@@ -42,7 +46,7 @@ const Message = ({ message, onDelete, deleted = false }: MessageProps) => {
 	return (
 		<div className="my-3 flex flex-col">
 			<div className="flex gap-1 items-center text-[#abb2c9]">
-				<p>{message.username}</p>
+				<p className={`${fodao && "text-[#cba6f7]"}`}>{`${fodao ? "😎 " : ""}`}{message.username}</p>
 				<button className={`text-[#f38ba8] px-5 ${isMessageYours && !deleted ? "block" : "hidden"}`} onClick={onDelete}>
 					<FaTrash />
 				</button>
