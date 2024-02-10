@@ -9,33 +9,34 @@ const App = () => {
 	const [user, setUser] = useState<Models.User<Models.Preferences>>();
 	const navigate = useNavigate();
 
+
 	useEffect(() => {
 		const getUser = async () => {
-			const res = await account.get()
-			setUser(res);
-		}
-
-		getUser();
-	}, []);
-
-	useEffect(() => {
-		const verifyIsLogged = async () => {
 			try {
-				console.log(user);
-				if (!user) {
-					navigate('/sign-up');
-					return;
-				}
-			} catch (error) {
-				console.log('error fetching user: ' + error);
+				const res = await account.get()
+				setUser(res);
+			} catch (err) {
+				console.log(err);
 				navigate('/sign-up');
 			}
 		}
 
-		if (user !== undefined) verifyIsLogged();
-	}, [navigate, user])
+		getUser();
+	}, [navigate]);
 
+	const verifyIsLogged = async () => {
+		try {
+			if (!user) {
+				navigate('/sign-up');
+				return;
+			}
+		} catch (error) {
+			console.log('error fetching user: ' + error);
+			navigate('/sign-up');
+		}
+	}
 
+	verifyIsLogged();
 
 	return (
 		<UserContext.Provider value={{ user, setUser }}>
