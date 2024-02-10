@@ -39,6 +39,7 @@ const Room = () => {
 			{
 				...messageToBeDeleted,
 				body: "Mensagem deletada",
+				is_deleted: true,
 			},
 		);
 	}
@@ -58,8 +59,7 @@ const Room = () => {
 				<div className='p-5 mb-14 flex flex-col-reverse h-[100vh] overflow-scroll'>
 					{
 						messages.map(message => (
-							message.body !== "Mensagem deletada" ?
-								<Message key={message.$id} message={message} onDelete={() => deleteMessage(message.$id)} deleted={false} /> : <Message key={message.$id} message={message} onDelete={() => { }} deleted={true} />
+							<Message key={message.$id} message={message} onDelete={() => deleteMessage(message.$id)} deleted={message.is_deleted} />
 						))
 					}
 				</div>
