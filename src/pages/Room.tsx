@@ -55,8 +55,8 @@ const Room = () => {
 	return (
 		<>
 			<Header />
-			<main className='bg-[#1e1e2e] min-h-[100vh]'>
-				<div className='p-5 mb-14 flex flex-col-reverse h-[100vh] overflow-scroll'>
+			<main className='bg-[#1e1e2e]'>
+				<div className='p-5 mb-14 mt-10 flex flex-col-reverse h-[100vh] overflow-scroll'>
 					{
 						messages.map(message => (
 							<Message key={message.$id} message={message} onDelete={() => deleteMessage(message.$id)} deleted={message.is_deleted} />

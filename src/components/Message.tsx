@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { FaTrash } from "react-icons/fa6";
-import { account } from "../appwriteConfig";
 import { Models } from "appwrite";
+import { UserContext } from "../UserContext";
 
 interface MessageProps {
 	message: Models.Document;
@@ -10,6 +10,8 @@ interface MessageProps {
 }
 
 const Message = ({ message, onDelete, deleted = false }: MessageProps) => {
+	const user = useContext(UserContext)
+
 	function formatTime(dateString: string): string { // Ai generated xd
 		// Convert the string to a Date object
 		const date = new Date(dateString);
@@ -24,17 +26,18 @@ const Message = ({ message, onDelete, deleted = false }: MessageProps) => {
 
 	const [isMessageYours, setIsMessageYours] = useState(false);
 
-	const init = async () => {
-		const res = await account.get();
-		if (res.$id === message.user_id) {
-			setIsMessageYours(true);
+	useEffect(() => {
+		const init = async () => {
+			if (user.user?.$id === message.user_id) {
+				setIsMessageYours(true);
+			}
+			if (user.user?.$id === "65c39a36aacf378c898a") {
+				setIsMessageYours(true);
+			}
 		}
-		if (res.$id === "65c39a36aacf378c898a") {
-			setIsMessageYours(true);
-		}
-	}
 
-	init();
+		init();
+	}, [message.user_id, user.user?.$id]);
 
 	return (
 		<div className="my-3 flex flex-col">
